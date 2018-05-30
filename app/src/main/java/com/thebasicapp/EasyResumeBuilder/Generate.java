@@ -39,6 +39,7 @@ import android.widget.Button;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.webviewtopdf.PdfView;
 
 import android.widget.Toast;
@@ -59,6 +60,7 @@ public class Generate extends Activity implements TimerInterface {
     private boolean isPdf = false;
     protected TimerThread timerThread;
     WebView webView;
+    protected FirebaseAnalytics mFirebaseAnalytics;
     //Initilize gphotoprint Analytics
 //    protected FirebaseAnalytics mFirebaseAnalytics;
 
@@ -107,7 +109,7 @@ public class Generate extends Activity implements TimerInterface {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         // Obtain the FirebaseAnalytics instance.
-//        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.generate);
         context = this;
@@ -413,7 +415,7 @@ public class Generate extends Activity implements TimerInterface {
         // TODO Auto-generated method stub
         super.onDestroy();
         if (resumeTask != null
-                && resumeTask.getStatus() == android.os.AsyncTask.Status.RUNNING) {
+                && resumeTask.getStatus() == AsyncTask.Status.RUNNING) {
             resumeTask.cancel(true);
         }
     }
@@ -589,7 +591,7 @@ public class Generate extends Activity implements TimerInterface {
 //
                                 String toread = resume_name_sended + ".pdf";
 //                                if (Constants.TEMPLATE_NO == 1) {
-                                file = new File(android.os.Environment.getExternalStorageDirectory() + "/Resumes", toread);
+                                file = new File(Environment.getExternalStorageDirectory() + "/Resumes", toread);
 
 //                                } else {
 //                                    file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), toread);
@@ -606,7 +608,7 @@ public class Generate extends Activity implements TimerInterface {
                                     isPdf = true;
 
                                     Uri path = Uri.fromFile(file);
-                                    if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                                         path = FileProvider.getUriForFile(
                                                 context,
                                                 context.getApplicationContext()
@@ -778,7 +780,12 @@ public class Generate extends Activity implements TimerInterface {
                             "\n" +
                             "</body></html>";
                     // SAMPLE 2 String
+
+
                     webView = (WebView) findViewById(R.id.webView);
+                    webView.clearView();
+                    webView.clearHistory();
+                    webView.reload();
                     webView.loadData(template, "text/html", null);
                     webView.getSettings().setDomStorageEnabled(true);
                     webView.getSettings().setJavaScriptEnabled(true);
@@ -801,6 +808,38 @@ public class Generate extends Activity implements TimerInterface {
                             progressDialog.dismiss();
 //                        PdfView.openPdfFile(Generate.this, getString(R.string.app_name), "Do you want to open the pdf file?" + fileName, path);
 
+                            Log.i("Template", "2");
+                            File file1 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), fileName);
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
+                            bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
+                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                            ArrayList<Uri> uriList = new ArrayList<Uri>();
+                            ArrayList<String> fileNameList = new ArrayList<String>();
+                            uriList.add(Uri.fromFile(file1));
+                            fileNameList.add(file1.getName());
+                            final Intent emailIntent = new Intent(
+                                    Intent.ACTION_SEND_MULTIPLE);
+                            emailIntent.setType("plain/text");
+                            emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                                    new String[]{""});
+                            emailIntent.putExtra(Intent.EXTRA_CC,
+                                    new String[]{""});
+                            emailIntent
+                                    .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+                                            "Resume ");
+
+
+                            if (!uriList.isEmpty()) {
+                                emailIntent.putParcelableArrayListExtra(
+                                        Intent.EXTRA_STREAM, uriList);
+                                emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+                                        fileNameList);
+                                emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+                            }
+                            emailIntent.setType("message/rfc822");
+                            startActivity(Intent.createChooser(emailIntent,
+                                    "Send email using:"));
                         }
 
                         @Override
@@ -810,7 +849,6 @@ public class Generate extends Activity implements TimerInterface {
                         }
 
                     });
-                    file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), fileName);
 
                 } else if (Constants.TEMPLATE_NO == 3) {
                     getData(3);
@@ -950,6 +988,9 @@ public class Generate extends Activity implements TimerInterface {
                             "</HTML>";
                     // Sample 3 String
                     webView = (WebView) findViewById(R.id.webView);
+                    webView.clearHistory();
+                    webView.clearView();
+                    webView.reload();
                     webView.loadData(template2, "text/html", null);
                     webView.getSettings().setDomStorageEnabled(true);
                     webView.getSettings().setJavaScriptEnabled(true);
@@ -969,8 +1010,40 @@ public class Generate extends Activity implements TimerInterface {
                         @Override
                         public void success(String path) {
                             progressDialog.dismiss();
+                            Log.i("Template", "3");
 //                        PdfView.openPdfFile(Generate.this, getString(R.string.app_name), "Do you want to open the pdf file?" + fileName, path);
+                            File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), fileName);
 
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
+                            bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
+                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                            ArrayList<Uri> uriList = new ArrayList<Uri>();
+                            ArrayList<String> fileNameList = new ArrayList<String>();
+                            uriList.add(Uri.fromFile(file2));
+                            fileNameList.add(file2.getName());
+                            final Intent emailIntent = new Intent(
+                                    Intent.ACTION_SEND_MULTIPLE);
+                            emailIntent.setType("plain/text");
+                            emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                                    new String[]{""});
+                            emailIntent.putExtra(Intent.EXTRA_CC,
+                                    new String[]{""});
+                            emailIntent
+                                    .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+                                            "Resume ");
+
+
+                            if (!uriList.isEmpty()) {
+                                emailIntent.putParcelableArrayListExtra(
+                                        Intent.EXTRA_STREAM, uriList);
+                                emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+                                        fileNameList);
+                                emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+                            }
+                            emailIntent.setType("message/rfc822");
+                            startActivity(Intent.createChooser(emailIntent,
+                                    "Send email using:"));
                         }
 
                         @Override
@@ -979,68 +1052,107 @@ public class Generate extends Activity implements TimerInterface {
 
                         }
                     });
-                    file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), fileName);
 
+                } else if (Constants.TEMPLATE_NO == 1) {
+                    Log.i("Template", "1");
+                    Intent shareIntent = new Intent(context, TemplatesDialog.class);
+                    shareIntent.putExtra("DialogType", "share");
+                    resume_name_sended = Profilename;
+                    String toread = resume_name_sended + ".pdf";
+                    file = new File(Environment
+                            .getExternalStorageDirectory() + "/Resumes", toread);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                    ArrayList<Uri> uriList = new ArrayList<Uri>();
+                    ArrayList<String> fileNameList = new ArrayList<String>();
+                    uriList.add(Uri.fromFile(file));
+                    fileNameList.add(file.getName());
+                    final Intent emailIntent = new Intent(
+                            Intent.ACTION_SEND_MULTIPLE);
+                    emailIntent.setType("plain/text");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                            new String[]{""});
+                    emailIntent.putExtra(Intent.EXTRA_CC,
+                            new String[]{""});
+                    emailIntent
+                            .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+                                    "Resume ");
+
+
+                    if (!uriList.isEmpty()) {
+                        emailIntent.putParcelableArrayListExtra(
+                                Intent.EXTRA_STREAM, uriList);
+                        emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+                                fileNameList);
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+                    }
+                    emailIntent.setType("message/rfc822");
+                    startActivity(Intent.createChooser(emailIntent,
+                            "Send email using:"));
                 }
 //////////////////////////////////////////////////
 //                OLD TEMPLATE
 
-                resume_name_sended = Profilename;
-                String toread = resume_name_sended + ".pdf";
-                if (Constants.TEMPLATE_NO == 1) {
-                    file = new File(android.os.Environment.getExternalStorageDirectory() + "/Resumes", toread);
-                }
-                ArrayList<Uri> uriList = new ArrayList<Uri>();
-
-                ArrayList<String> fileNameList = new ArrayList<String>();
-//                uriList.add(Uri.fromFile(file));
-
-                // New Approach
-                Uri apkURI = FileProvider.getUriForFile(
-                        context,
-                        context.getApplicationContext()
-                                .getPackageName() + ".provider", file);
-                uriList.add(apkURI);
-                // End New Approach
-                fileNameList.add(file.getName());
-                final Intent emailIntent = new Intent(
-                        Intent.ACTION_SEND_MULTIPLE);
-//                emailIntent.setType("plain/text");
-                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-                        new String[]{""});
-//                emailIntent.putExtra(android.content.Intent.EXTRA_CC,
+//                resume_name_sended = Profilename;
+//                String toread = resume_name_sended + ".pdf";
+//                if (Constants.TEMPLATE_NO == 1) {
+//                    file = new File(android.os.Environment.getExternalStorageDirectory() + "/Resumes", toread);
+//                }
+//                ArrayList<Uri> uriList = new ArrayList<Uri>();
+//
+//                ArrayList<String> fileNameList = new ArrayList<String>();
+////                uriList.add(Uri.fromFile(file));
+//
+//                // New Approach
+//                Uri apkURI = FileProvider.getUriForFile(
+//                        context,
+//                        context.getApplicationContext()
+//                                .getPackageName() + ".provider", file);
+//                uriList.add(apkURI);
+//                // End New Approach
+//                fileNameList.add(file.getName());
+//                final Intent emailIntent = new Intent(
+//                        Intent.ACTION_SEND_MULTIPLE);
+////                emailIntent.setType("plain/text");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
 //                        new String[]{""});
-                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                emailIntent
-                        .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
-                                "Resume ");
+////                emailIntent.putExtra(android.content.Intent.EXTRA_CC,
+////                        new String[]{""});
+//                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                emailIntent
+//                        .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+//                                "Resume ");
+//
+//
+//                if (!uriList.isEmpty()) {
+//                    emailIntent.putParcelableArrayListExtra(
+//                            Intent.EXTRA_STREAM, uriList);
+//                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+//                            fileNameList);
+//                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+//
+//
+//                }
+//
+//
+////                emailIntent.setDataAndType(apkURI, "message/rfc822");
+//                emailIntent.setData(apkURI);
+//                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                emailIntent.setType("message/rfc822");
+//                startActivity(Intent.createChooser(emailIntent,
+//                        "Send email using:"));
 
-
-                if (!uriList.isEmpty()) {
-                    emailIntent.putParcelableArrayListExtra(
-                            Intent.EXTRA_STREAM, uriList);
-                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
-                            fileNameList);
-                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
-
-
-                }
-
-
-//                emailIntent.setDataAndType(apkURI, "message/rfc822");
-                emailIntent.setData(apkURI);
-                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                emailIntent.setType("message/rfc822");
-                startActivity(Intent.createChooser(emailIntent,
-                        "Send email using:"));
 
             }
         }
     }
 
     public void getData(int templateNo) {
-        Toast.makeText(c, "No: "+templateNo, Toast.LENGTH_SHORT).show();
-        Log.i("TemplateNo:",""+templateNo);
+        Toast.makeText(c, "No: " + templateNo, Toast.LENGTH_SHORT).show();
+        Log.i("TemplateNo:", "" + templateNo);
         if (modelClass.getmOther() != null) {
             otherLicence = modelClass.getmOther().getDlicience();
             otherPasport = modelClass.getmOther().getPassno();
@@ -1080,7 +1192,7 @@ public class Generate extends Activity implements TimerInterface {
         for (int i = 0; i < refer_list.size(); i++) {
 
             String sName, sEmail;
-            if (templateNo==3) {
+            if (templateNo == 3) {
                 sName = "<p class=\"p34 ft10\">" + refer_list.get(i).getRefname() + "</p>\n";
                 sEmail = "<p class=\"p34 ft11\">" + refer_list.get(i).getRefemail() + "</p>\n";
 
