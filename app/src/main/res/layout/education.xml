@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RegisterJobMainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:contentDescription="@string/education_details_page"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/titlebar_ref"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/barheight"
+        android:layout_alignParentTop="true"
+        layout="@layout/titlebar_new" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/adView"
+        android:layout_below="@+id/titlebar_ref"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <LinearLayout
+            android:id="@+id/RegisterJobContentLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/Degree"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_round"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/DegreeTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/degree"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/DegreeEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_degree_name"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/UniversityEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/University"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/UniversityTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/school"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/UniversityEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/enter_universty_name"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/SchoolEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+       
+
+            <LinearLayout
+                android:id="@+id/Result"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/ResultTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/result"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/ResultEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_your_result"
+                    android:inputType="number|phone"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/Passing_YearEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Passing_Year"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/Passing_YearTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/completiondate"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <TextView
+                    android:id="@+id/Passing_YearEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_passing_year"
+                    android:lines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Save_Clear"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" >
+
+                <Button
+                    android:id="@+id/Save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_selector"
+                    android:text="@string/save"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/Clear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_selector"
+                    android:text="@string/clear"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/adView"
+        layout="@layout/adxml"
+        android:visibility="gone" />
+
+</RelativeLayout>

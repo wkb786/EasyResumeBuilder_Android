@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+    compileOptions.encoding = 'windows-1251' // write your encoding here
+    defaultConfig {
+        applicationId "com.thebasicapp.EasyResumeBuilder"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 10
+        versionName '1.3.4'
+    }
+
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.google.firebase:firebase-ads:10.2.1'
+    compile files('libs/itextpdf-5.5.3.jar')
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-crash:10.2.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.1.0'
+    compile 'com.google.android.gms:play-services-ads:10.2.1'
+    compile 'com.google.android.gms:play-services-analytics:10.2.1'
+    compile 'com.google.android.gms:play-services-drive:10.2.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile 'com.android.support:multidex:1.0.2'
+    implementation project(':webviewtopdf')
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
+}
+
+
+apply plugin: 'com.google.gms.google-services'

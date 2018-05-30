@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/barheight"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/top_bar"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imageviewpersonal"
+                android:layout_width="@dimen/imageviewheight_width"
+                android:layout_height="@dimen/imageviewheight_width"
+                android:contentDescription="@string/profiledetails"
+                android:src="@drawable/person_ic_w" />
+
+            <TextView
+                android:id="@+id/textviewpersonal"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="@string/edit_profile"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bar_textsize" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edit_prof_edt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/text_view"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="textPersonName" >
+    </EditText>
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/save_btn_h"
+        android:layout_below="@+id/edit_prof_edt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:textColor="#ffffff"
+        android:background="@drawable/btn_selector"
+        android:text="@string/update" />
+
+</RelativeLayout>

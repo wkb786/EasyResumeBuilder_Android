@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- About -->
+    <string name="share_using">Share Using...</string>
+    <string name="text_no_internet">No Internet Connection Available!</string>
+    <string name="text_body">Hi\n Here is good website which contains very nice \n android and iphone apps\nThis is website link\n http://technokeet.com/</string>
+    <string name="visit_us">Visit Us</string>
+    <string name="write_a_review">Your View</string>
+    <string name="more_apps">More Apps</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="follow_us">Follow Us</string>
+    <string name="be_a_fan">Be a Fan</string>
+    <string name="tell_a_friend">Tell a Friend</string>
+    <!--  -->
+    <string name="about_us">thebasicapp is a consulting firm specialized in providing android software programming solutions for individuals and companies. We are proficient in implementing mobile application solutions in a variety of categories that range from business applications to entertainment, multimedia, location-based and much more. We are determined to provide our customers with the utmost level of professionalism and satisfaction as we help develop and bring their ideas to life.
+
+Our team is composed by experienced professionals and specialists in charged of providing clients smart mobile solutions that can help propel their businesses into the 21st century. We are available 24/7 through our different support channels, willing to swiftly and efficiently assist individuals and companies to meet their business needs.
+
+ Our portfolio of applications in the google play store serves as a testament to our knowledge and expertise on the field. With more than 3 million downloads and excellent reviews from top-notch community sites and users from all around the world, our portfolio demonstrates the quality of our work as well as the level of professionalism and outstanding support we provide to our clients.</string>
+    <string name="text_about_us">About Us</string>
+     <string name="text_find_us_on_social_media">Find us on social media</string>
+
+      <string name="send_email_">Send email...</string>
+</resources>

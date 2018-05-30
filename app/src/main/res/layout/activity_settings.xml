@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:contentDescription="@string/profile_name_page"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+    
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/barheight"
+        android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+    <include layout="@layout/titlebar_new"
+        android:id="@+id/titlebar"
+        />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ll_adView"
+        android:layout_below="@+id/top" >
+        
+        <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/title_bar"
+                    android:gravity="center"
+                    android:text="@string/date_format"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textView1" />
+		<RadioGroup 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rgdateformat"
+        android:layout_below="@+id/textView1"
+         >
+        
+        <RadioButton 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:id="@+id/dd_mmm_yyyy"
+        	android:text="@string/dd_mmm_yyyy" />
+        
+        <RadioButton 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:id="@+id/dd_mm_yyyy"
+        	android:text="@string/dd_mm_yyyy" />
+        
+        <RadioButton 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:id="@+id/mm_dd_yyyy"
+        	android:text="@string/mm_dd_yyyy" />
+        
+         <RadioButton 
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:id="@+id/yyyy_mm_dd"
+        	android:text="@string/yyyy_mm_dd" />
+        
+    </RadioGroup>
+       
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_adView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <include
+            android:id="@+id/adView"
+            layout="@layout/adxml"
+            android:gravity="bottom"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</RelativeLayout>

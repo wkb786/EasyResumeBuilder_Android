@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash" >
+
+   <!-- <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="@dimen/iv_splash_wh"
+        android:layout_centerInParent="true"
+        android:layout_height="@dimen/iv_splash_wh"
+        android:background="@drawable/icon_web" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/tv_splash_mb"
+        android:textColor="#ffffff"
+        android:textStyle="normal"
+        android:shadowColor="#242424"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="1"
+        android:text="@string/easy_resume_builder"
+        android:textSize="@dimen/tv_splash_size" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/tv1_splash_mb"
+        android:textColor="#2a2a2a"
+        android:gravity="center"
+        android:textStyle="normal"
+        android:text="@string/powered_by_thebasicapp"
+        android:textSize="@dimen/tv1_splash_size" />-->
+
+</RelativeLayout>

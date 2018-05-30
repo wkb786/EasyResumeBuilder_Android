@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RegisterJobMainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:contentDescription="@string/addproject_details_page"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/barheight"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/top_bar"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <include layout="@layout/titlebar_new"/>
+
+     <!--    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imageviewpersonal"
+                android:layout_width="@dimen/imageviewheight_width"
+                android:layout_height="@dimen/imageviewheight_width"
+                android:contentDescription="@string/projectdetails"
+                android:src="@drawable/project_ic_w" />
+
+            <TextView
+                android:id="@+id/textviewpersonal"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="@string/projectdetails"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bar_textsize" />
+        </LinearLayout> -->
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/adView"
+        android:layout_below="@+id/titlebar"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+
+        <LinearLayout
+            android:id="@+id/RegisterJobContentLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/projecttitle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/text_view_round"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/project_titleTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/ptitle"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/project_titleEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_project_name"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/project_duration"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/proj_durationTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/pduration"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/proj_durationEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/enter_project_duration"
+                    android:inputType="none"
+                    android:lines="1"
+                    android:onClick="button_click"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Role"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/RoleTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/role"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/RoleEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_your_role"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/Team_sizeEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Team_size"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/Team_sizeTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/tsize"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/Team_sizeEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_team_size"
+                    android:inputType="number|phone"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/ExpertiseEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Expertise"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights_mulitiline"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/ExpertiseTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/expertise"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/ExpertiseEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_your_expertise"
+                    android:lines="6"
+                    android:maxLines="6"
+                    android:singleLine="false"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollbars="vertical"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Save_Clear"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="5dp"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp" >
+
+                <Button
+                    android:id="@+id/Save"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_selector"
+                    android:text="@string/save"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/Clear"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_selector"
+                    android:text="@string/clear"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/adView"
+        layout="@layout/adxml"
+        android:visibility="gone" />
+
+</RelativeLayout>

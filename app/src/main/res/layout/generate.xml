@@ -1,0 +1,293 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+                android:contentDescription="@string/generate_resume_page"
+    tools:context=".MainActivity" >
+
+    <RelativeLayout
+        android:id="@+id/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/barheight"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/top_bar"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imageviewpersonal"
+                android:layout_width="@dimen/imageviewheight_width"
+                android:layout_height="@dimen/imageviewheight_width"
+                android:contentDescription="@string/generateresume"
+                android:src="@drawable/generate_ic_w" />
+
+            <TextView
+                android:id="@+id/textviewpersonal"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="@string/generateresume"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bar_textsize" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titlebar"
+        android:layout_marginTop="10dp" >
+
+        <LinearLayout
+            android:id="@+id/MainLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheighttitle"
+                android:background="@drawable/sub_title"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textviewpersonal2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/generate"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/LinearLayout03"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/share"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                        android:contentDescription="@string/aboutus"
+                    android:background="@drawable/selector_text_btn" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/imageviewabout"
+                        android:layout_width="@dimen/imageviewheight_width"
+                        android:layout_height="@dimen/imageviewheight_width"
+                        android:contentDescription="@string/aboutus"
+                        android:src="@drawable/email_ic" />
+
+                    <TextView
+                        android:id="@+id/textviewabout"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/share_via_email"
+                        android:textColor="#a2a2a2"
+                        android:textSize="@dimen/bar_textsize" />
+                </LinearLayout>
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/generateandshare"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/selector_text_btn"
+                    android:contentDescription="@string/generateandshareresume" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/imageview_gen_share"
+                        android:layout_width="@dimen/imageviewheight_width"
+                        android:layout_height="@dimen/imageviewheight_width"
+                        android:contentDescription="@string/generateandshareresume"
+                        android:src="@drawable/share_ic" />
+
+                    <TextView
+                        android:id="@+id/textview_gen_share"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/view_download"
+                        android:textColor="#a2a2a2"
+                        android:textSize="@dimen/bar_textsize" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/LinearLayout031"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/about"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                        android:contentDescription="@string/aboutus"
+                    android:background="@drawable/selector_text_btn" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/imageviewabout1"
+                        android:layout_width="@dimen/imageviewheight_width"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/aboutus"
+                        android:src="@drawable/ic_rateus" />
+
+                    <TextView
+                        android:id="@+id/textviewabout2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/rate_us"
+                        android:textColor="#a2a2a2"
+                        android:textSize="@dimen/bar_textsize" />
+                </LinearLayout>
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/LinearLayout032"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/suggestion"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                        android:contentDescription="@string/aboutus"
+                    android:background="@drawable/selector_text_btn" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/imageviewsuggestion1"
+                        android:layout_width="@dimen/imageviewheight_width"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/aboutus"
+                        android:src="@drawable/ic_suggestion" />
+
+                    <TextView
+                        android:id="@+id/textviewsuggestion2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/suggestion"
+                        android:textColor="#a2a2a2"
+                        android:textSize="@dimen/bar_textsize" />
+                </LinearLayout>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/LinearLayout0333"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/translation"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                        android:contentDescription="@string/aboutus"
+                    android:background="@drawable/selector_text_btn" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/imageviewtranslation1"
+                        android:layout_width="@dimen/imageviewheight_width"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/aboutus"
+                        android:src="@drawable/help_us_translate_pressed" />
+
+                    <TextView
+                        android:id="@+id/textviewtranslation2"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/help_translataion"
+                        android:textColor="#a2a2a2"
+                        android:textSize="@dimen/bar_textsize" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include android:id="@+id/adView"
+        layout="@layout/adxml"
+        android:visibility="gone" />
+    <WebView
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1.9"
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="visible"
+        />
+
+</RelativeLayout>

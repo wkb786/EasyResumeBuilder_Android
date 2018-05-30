@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/titlebar"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/barheight"
+    android:background="@drawable/top_bar"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/imageviewpersonal"
+        android:layout_width="@dimen/imageviewheight_width"
+        android:layout_height="@dimen/imageviewheight_width"
+        android:contentDescription="@string/educationdetails"
+        android:src="@drawable/edu_ic_w" />
+
+    <TextView
+        android:id="@+id/textviewpersonal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="left|center_vertical"
+        android:text="@string/educationdetails"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/bar_textsize" />
+
+</LinearLayout>

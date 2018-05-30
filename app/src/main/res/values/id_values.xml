@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Ads Id,Stoe Links and testing device ids -->
+    <!-- Ads Id,Stoe Links and testing device ids -->
+
+    <string name="allappslink">market://search?q=pub:thebasicapp</string>
+    <string name="linkstore">https://play.google.com/store/apps/dev?id=8824991976038840067</string>
+    <string name="allappsweblink">https://play.google.com/store/apps/developer?id=thebasicapp</string>
+    <string name="web_link">http://technokeet.com/</string>
+    <string name="write_reviwe">market://details?id=com.thebasicapp.easyresumebuilder</string>
+    <string name="facebook_page_link">https://www.facebook.com/pages/Techno-Keet-Pvt-Ltd/786151178128912</string>
+    <string name="tiwiter_page_link">https://twitter.com/technokeet/followers</string>
+    <!--<string name="testdevice">E08CFB2DE273FCDBB0C145FAE464189C</string>-->
+    <string name="testdevice">ca-app-pub-6060832157788103/1218371270</string>
+    <string name="send_email_id">support@technokeet.com</string>
+    <string name="send_email_text">Send email...</string>
+<!--TEST IDS-->
+    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_full_screen">ca-app-pub-3940256099942544/1033173712</string>
+<!--REAL IDS-->
+    <!--<string name="admob_banner_id">ca-app-pub-6060832157788103/9587570877</string>-->
+    <!--<string name="interstitial_full_screen">ca-app-pub-6060832157788103/1218371270</string>-->
+
+</resources>

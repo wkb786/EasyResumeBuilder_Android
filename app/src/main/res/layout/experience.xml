@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RegisterJobMainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg"
+    android:contentDescription="@string/experience_details_page"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/titlebar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/barheight"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/top_bar"
+        android:gravity="center"
+        android:orientation="horizontal" >
+	<include layout="@layout/titlebar_new"/>
+       <!--  <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/imageviewpersonal"
+                android:layout_width="@dimen/imageviewheight_width"
+                android:layout_height="@dimen/imageviewheight_width"
+                android:contentDescription="@string/experiencedetails"
+                android:paddingBottom="5dp"
+                android:src="@drawable/work_ic_w" />
+
+            <TextView
+                android:id="@+id/textviewpersonal"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="left|center_vertical"
+                android:text="@string/experiencedetails"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bar_textsize" />
+        </LinearLayout> -->
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/adView"
+        android:layout_below="@+id/titlebar"
+        android:layout_marginTop="6dp"
+        android:padding="08dp" >
+
+        <LinearLayout
+            android:id="@+id/RegisterJobContentLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/Company1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_round"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/Company"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/company"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/CompanyEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_company_name"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/PositionEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Position"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/PositionTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/position"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/PositionEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/enter_your_position"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/PeriodEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Period"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/PeriodTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/period"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/PeriodEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_service_period_in_company"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/LocationEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/LocationTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/location"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/LocationEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_company_location"
+                    android:inputType="textCapWords"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/SalaryEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Salary"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights"
+                android:background="@drawable/text_view_flat"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/SalaryTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/salary"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/SalaryEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="3dp"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/enter_your_salary"
+                    android:lines="1"
+                    android:nextFocusDown="@+id/Job_ResponsibilityEdt"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:scrollHorizontally="true"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/Job_Responsibility"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_heights_mulitiline"
+                android:focusableInTouchMode="true"
+                android:gravity="left"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/Job_ResponsibilityTv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/title_bar"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="@string/jobresponsibility"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <EditText
+                    android:id="@+id/Job_ResponsibilityEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="90dp"
+                    android:layout_below="@+id/Job_ResponsibilityTv"
+                    android:background="@drawable/text_view"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="top|left"
+                    android:hint="@string/enter_you_job_responsibility"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:lines="6"
+                    android:paddingTop="5dp"
+                    android:layout_marginTop="@dimen/exp"
+                    android:maxLines="6"
+                    android:singleLine="false"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
+                    android:scrollbars="vertical"
+                    android:textColor="#a2a2a2"
+                    android:textColorHint="#d2d2d2"
+                    android:textSize="@dimen/textView1_1" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/Save_Clear"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/barheight"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" >
+
+                <Button
+                    android:id="@+id/Save"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_selector"
+                    android:text="@string/save"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="5dp"
+                    android:layout_height="fill_parent" />
+
+                <Button
+                    android:id="@+id/Clear"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_selector"
+                    android:text="@string/clear"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/bar_textsize" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/adView"
+        layout="@layout/adxml"
+        android:visibility="gone" />
+
+</RelativeLayout>
