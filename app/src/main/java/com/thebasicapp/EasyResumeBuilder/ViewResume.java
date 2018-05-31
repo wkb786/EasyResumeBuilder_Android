@@ -398,6 +398,7 @@ public class ViewResume extends Activity {
                     ".p2{text-align: left;padding-left: 1px;margin-top: 29px;margin-bottom: 0px;}\n" +
                     ".p3{text-align: left;padding-left: 9px;margin-top: 74px;margin-bottom: 10px;}\n" +
                     ".p33{text-align: left;padding-left: 10px;margin-top: 10px;margin-bottom: 0px;}\n" +
+                    ".p333{text-align: left;padding-left: 10px;margin-top: 10px;margin-bottom: 1000px;}\n" +
                     ".p34{text-align: left;padding-left: 20px;margin-top: 0px;margin-bottom: 0px;}\n" +
                     ".p4{text-align: left;margin-top: 36px;margin-bottom: 0px;}\n" +
                     ".p5{text-align: left;padding-right: 88px;margin-top: 7px;margin-bottom: 0px;}\n" +
@@ -468,7 +469,7 @@ public class ViewResume extends Activity {
                     educateString +
                     "<p class=\"p33 ft2\">PROJECT\tDETAIL</p>\n" + projString +
                     "<p class=\"p33 ft2\">REFERENCES</p>\n" + ref +
-                    "<p class=\"p33 ft2\"></p>\n" +
+                    "<p class=\"p333 ft2\"></p>\n" +
                     "</div>\n" +
                     "</div>\n" +
                     "</div>\n" +
@@ -488,7 +489,7 @@ public class ViewResume extends Activity {
         open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/PDFTest/");
+                File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS + "/Resume/");
                 final String fileName = "Test.pdf";
 
                 final ProgressDialog progressDialog = new ProgressDialog(c);

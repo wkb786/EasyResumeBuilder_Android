@@ -35,7 +35,7 @@ android:id="@+id/img1"
             android:layout_height="@dimen/_100sdp"
             android:layout_weight="1"
             android:paddingLeft="@dimen/_5sdp"
-            android:src="@color/crop__selector_focused" />
+            android:src="@drawable/sample3" />
     </LinearLayout>
 
     <LinearLayout

@@ -107,7 +107,7 @@
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
             android:name=".TemplatesDialog"
-
+            android:label="Choose Template"
             android:theme="@style/mytheme"></activity>
         <activity android:name=".Generate"></activity>
 

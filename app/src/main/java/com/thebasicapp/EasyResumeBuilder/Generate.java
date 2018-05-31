@@ -26,6 +26,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.content.FileProvider;
 import android.text.format.Time;
 import android.util.Base64;
@@ -60,11 +61,13 @@ public class Generate extends Activity implements TimerInterface {
     private boolean isPdf = false;
     protected TimerThread timerThread;
     WebView webView;
+    WebView webView2;
     protected FirebaseAnalytics mFirebaseAnalytics;
     //Initilize gphotoprint Analytics
 //    protected FirebaseAnalytics mFirebaseAnalytics;
 
     AsyncTask<Void, Void, Void> resumeTask;
+    AsyncTask<Void, Void, Void> resumeTask2;
 
    /* InterstitialAd mInterstitialAd;
     AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
@@ -103,6 +106,11 @@ public class Generate extends Activity implements TimerInterface {
     boolean check = false;
     String template;
     String template2;
+    File file1 = null;
+    File file2 = null;
+    public File path_file1;
+    public String fileName1;
+    public ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +120,11 @@ public class Generate extends Activity implements TimerInterface {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.generate);
+        progressDialog = new ProgressDialog(Generate.this);
         context = this;
         db = new DatabaseHandler(this);
-
+        webView = (WebView) findViewById(R.id.webView);
+        webView2 = (WebView) findViewById(R.id.webView2);
        /* mInterstitialAd = new InterstitialAd(this);
         // set the ad unit ID
         mInterstitialAd.setAdUnitId(
@@ -418,6 +428,10 @@ public class Generate extends Activity implements TimerInterface {
                 && resumeTask.getStatus() == AsyncTask.Status.RUNNING) {
             resumeTask.cancel(true);
         }
+        if (resumeTask2 != null
+                && resumeTask2.getStatus() == AsyncTask.Status.RUNNING) {
+            resumeTask2.cancel(true);
+        }
     }
 
     @Override
@@ -608,13 +622,13 @@ public class Generate extends Activity implements TimerInterface {
                                     isPdf = true;
 
                                     Uri path = Uri.fromFile(file);
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                        path = FileProvider.getUriForFile(
-                                                context,
-                                                context.getApplicationContext()
-                                                        .getPackageName() + ".provider", file);
-                                        Log.e("Path", "NewVersion");
-                                    }
+//                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                                        path = FileProvider.getUriForFile(
+//                                                context,
+//                                                context.getApplicationContext()
+//                                                        .getPackageName() + ".provider", file);
+//                                        Log.e("Path", "NewVersion");
+//                                    }
 
                                     Intent intent = new Intent(
                                             Intent.ACTION_VIEW);
@@ -667,7 +681,283 @@ public class Generate extends Activity implements TimerInterface {
 
                 if (Constants.TEMPLATE_NO == 2) {
                     getData(2);
+//share1();
 
+
+                } else if (Constants.TEMPLATE_NO == 3) {
+                    getData(3);
+//                    share2();
+
+
+                } else if (Constants.TEMPLATE_NO == 1) {
+                    Log.i("Template", "1");
+                    Intent shareIntent = new Intent(context, TemplatesDialog.class);
+                    shareIntent.putExtra("DialogType", "share");
+                    resume_name_sended = Profilename;
+                    String toread = resume_name_sended + ".pdf";
+                    file = new File(Environment
+                            .getExternalStorageDirectory() + "/Resumes", toread);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
+                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
+                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                    ArrayList<Uri> uriList = new ArrayList<Uri>();
+                    ArrayList<String> fileNameList = new ArrayList<String>();
+                    uriList.add(Uri.fromFile(file));
+                    fileNameList.add(file.getName());
+                    final Intent emailIntent = new Intent(
+                            Intent.ACTION_SEND_MULTIPLE);
+                    emailIntent.setType("plain/text");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                            new String[]{""});
+                    emailIntent.putExtra(Intent.EXTRA_CC,
+                            new String[]{""});
+                    emailIntent
+                            .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+                                    "Resume ");
+
+
+                    if (!uriList.isEmpty()) {
+                        emailIntent.putParcelableArrayListExtra(
+                                Intent.EXTRA_STREAM, uriList);
+                        emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+                                fileNameList);
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+                    }
+                    emailIntent.setType("message/rfc822");
+                    startActivity(Intent.createChooser(emailIntent,
+                            "Send email using:"));
+                }
+//////////////////////////////////////////////////
+//                OLD TEMPLATE
+
+//                resume_name_sended = Profilename;
+//                String toread = resume_name_sended + ".pdf";
+//                if (Constants.TEMPLATE_NO == 1) {
+//                    file = new File(android.os.Environment.getExternalStorageDirectory() + "/Resumes", toread);
+//                }
+//                ArrayList<Uri> uriList = new ArrayList<Uri>();
+//
+//                ArrayList<String> fileNameList = new ArrayList<String>();
+////                uriList.add(Uri.fromFile(file));
+//
+//                // New Approach
+//                Uri apkURI = FileProvider.getUriForFile(
+//                        context,
+//                        context.getApplicationContext()
+//                                .getPackageName() + ".provider", file);
+//                uriList.add(apkURI);
+//                // End New Approach
+//                fileNameList.add(file.getName());
+//                final Intent emailIntent = new Intent(
+//                        Intent.ACTION_SEND_MULTIPLE);
+////                emailIntent.setType("plain/text");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
+//                        new String[]{""});
+////                emailIntent.putExtra(android.content.Intent.EXTRA_CC,
+////                        new String[]{""});
+//                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                emailIntent
+//                        .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+//                                "Resume ");
+//
+//
+//                if (!uriList.isEmpty()) {
+//                    emailIntent.putParcelableArrayListExtra(
+//                            Intent.EXTRA_STREAM, uriList);
+//                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+//                            fileNameList);
+//                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+//
+//
+//                }
+//
+//
+////                emailIntent.setDataAndType(apkURI, "message/rfc822");
+//                emailIntent.setData(apkURI);
+//                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                emailIntent.setType("message/rfc822");
+//                startActivity(Intent.createChooser(emailIntent,
+//                        "Send email using:"));
+
+
+            }
+        }
+    }
+
+    public void getData(final int templateNo) {
+        experiencesList.clear();
+        educationList.clear();
+        projectsList.clear();
+        referencesList.clear();
+        refr_array.clear();
+        proj_array.clear();
+        exper_array.clear();
+        educate_array.clear();
+        exper_list.clear();
+        educate_list.clear();
+        pro_list.clear();
+        refer_list.clear();
+
+        resumeTask2 = new AsyncTask<Void, Void, Void>() {
+
+            @Override
+            protected void onPreExecute() {
+                // TODO Auto-generated method stub
+                super.onPreExecute();
+
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                // TODO Auto-generated method stub
+
+                Log.i("TemplateNo:", "" + templateNo);
+                if (modelClass.getmOther() != null) {
+                    otherLicence = modelClass.getmOther().getDlicience();
+                    otherPasport = modelClass.getmOther().getPassno();
+                } else {
+                    otherLicence = "N/A";
+                    otherPasport = "N/A";
+                }
+                if (exper_list.size() != 0) {
+                    exper_list.clear();
+                }
+
+
+                exper_list = db.getAllExperbyId(prof_id_string);
+                educate_list = db.getAllEducatebyID(prof_id_string);
+                pro_list = db.getAllProjbyId(prof_id_string);
+                refer_list = db.getAllRefrenbyId(prof_id_string);
+                //Contact Info
+                number = modelClass.getmContact().getContact();
+                address = modelClass.getmContact().getAddress();
+                language = modelClass.getmContact().getLanguage();
+                email = modelClass.getmContact().getEmail();
+                contactName = modelClass.getmContact().getName();
+                //Experience
+//        exper_location = modelClass.getmExper().getLocation();
+//        exper_period = modelClass.getmExper().getPeriod();
+//        exper_position = modelClass.getmExper().getPosition();
+//        exper_salary = modelClass.getmExper().getSalary();
+//        exper_company = modelClass.getmExper().getCompany();
+//        exper_responsibility = modelClass.getmExper().getResponsibility();
+                ref.setLength(0);
+                ref = new StringBuilder();
+                for (int i = 0; i < refer_list.size(); i++) {
+
+                    String sName, sEmail;
+                    if (templateNo == 3) {
+                        sName = "<p class=\"p34 ft10\">" + refer_list.get(i).getRefname() + "</p>\n";
+                        sEmail = "<p class=\"p34 ft11\">" + refer_list.get(i).getRefemail() + "</p>\n";
+
+                    } else {
+                        sName = "<p class=\"p34 ft6\">" + refer_list.get(i).getRefname() + "</p>\n";
+                        sEmail = "<p class=\"p34 ft3\">" + refer_list.get(i).getRefemail() + "</p>\n";
+                    }
+                    refr_array.add(sName + sEmail);
+
+                    ref.append(refr_array.get(i));
+                }
+                projString.setLength(0);
+                projString = new StringBuilder();
+                for (int i = 0; i < pro_list.size(); i++) {
+                    if (templateNo == 3) {
+                        projTitle = "<p class=\"p34 ft10\">" + pro_list.get(i).getPrTitle() + "</p>\n";
+                        projDduration = "<p class=\"p34 ft11\">" + pro_list.get(i).getPrDuration() + "</p>\n";
+                        projRole = "<p class=\"p34 ft11\">" + pro_list.get(i).getRole() + "</p>\n";
+                        projTeamsize = "<p class=\"p34 ft11\">" + pro_list.get(i).getTsize() + "</p>\n";
+                        projExpertise = "<p class=\"p34 ft11\">" + pro_list.get(i).getExpertise() + "</p>\n";
+
+                    } else {
+                        projTitle = "<p class=\"p34 ft6\">" + pro_list.get(i).getPrTitle() + "</p>\n";
+                        projDduration = "<p class=\"p34 ft3\">" + pro_list.get(i).getPrDuration() + "</p>\n";
+                        projRole = "<p class=\"p34 ft3\">" + pro_list.get(i).getRole() + "</p>\n";
+                        projTeamsize = "<p class=\"p34 ft3\">" + pro_list.get(i).getTsize() + "</p>\n";
+                        projExpertise = "<p class=\"p34 ft3\">" + pro_list.get(i).getExpertise() + "</p>\n";
+                    }
+                    proj_array.add(projTitle + projDduration + projRole + projExpertise);
+                    projString.append(proj_array.get(i).toString());
+
+
+                }
+                experString.setLength(0);
+                experString = new StringBuilder();
+                for (int i = 0; i < exper_list.size(); i++) {
+                    String period[] = exper_list.get(i).getPeriod().split("/");
+                    if (templateNo == 3) {
+                        exper_company = "<p class=\"p34 ft10\">" + exper_list.get(i).getCompany() + "</p>\n";
+                        exper_responsibility = "<p class=\"p34 ft11\">" + exper_list.get(i).getResponsibility() + "</p>\n";
+                        exper_location = "<p class=\"p34 ft11\">" + exper_list.get(i).getLocation() + "</p>\n";
+                        exper_period = "<p class=\"p34 ft11\">" + period[1] + "</p>\n";
+                        exper_position = "<p class=\"p34 ft11\">" + exper_list.get(i).getPosition() + "</p>\n";
+                        exper_salary = "<p class=\"p34 ft11\">" + exper_list.get(i).getSalary() + "</p>\n";
+                    } else {
+                        exper_company = "<p class=\"p34 ft6\">" + exper_list.get(i).getCompany() + "</p>\n";
+                        exper_responsibility = "<p class=\"p34 ft3\">" + exper_list.get(i).getResponsibility() + "</p>\n";
+                        exper_location = "<p class=\"p34 ft3\">" + exper_list.get(i).getLocation() + "</p>\n";
+                        exper_period = "<p class=\"p34 ft3\">" + period[1] + "</p>\n";
+                        exper_position = "<p class=\"p34 ft3\">" + exper_list.get(i).getPosition() + "</p>\n";
+                        exper_salary = "<p class=\"p34 ft3\">" + exper_list.get(i).getSalary() + "</p>\n";
+
+                    }
+                    exper_array.add(exper_company + exper_responsibility + exper_location + exper_period + exper_position);
+                    experString.append(exper_array.get(i));
+
+                }
+                educateString.setLength(0);
+                educateString = new StringBuilder();
+                for (int i = 0; i < educate_list.size(); i++) {
+                    edu_degree = educate_list.get(i).getDegree();
+                    edu_passingYear = educate_list.get(i).getPassingyear();
+                    edu_result = educate_list.get(i).getResult();
+                    edu_schoolName = educate_list.get(i).getSchool();
+                    edu_uni = educate_list.get(i).getUni();
+                    edu_date = educate_list.get(i).getStartDate();
+                    Date convertedDate = new Date();
+                    String date = "";
+                    String[] parts = edu_passingYear.split("/");
+                    try {
+                        String part2 = parts[1]; // 004
+                        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATETYPE1);
+                        convertedDate = dateFormat.parse(part2);
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(convertedDate);
+                        SimpleDateFormat format = new SimpleDateFormat(UIHelper.getDateFormat(c));
+                        date = format.format(calendar.getTime());
+                    } catch (Exception e) {
+
+                    }
+                    Educate e = new Educate(edu_degree, edu_uni, edu_schoolName, edu_result
+                            , date, null, edu_date);
+
+                    educationList.add(e);
+                    if (templateNo == 3) {
+                        edu_degree = "<p class=\"p34 ft10\">" + educate_list.get(i).getDegree() + "</p>\n";
+                        edu_passingYear = "<p class=\"p34 ft11\">" + date + "</p>\n";
+                        edu_uni = "<p class=\"p34 ft11\">" + educate_list.get(i).getUni() + "</p>\n";
+                        edu_result = "<p class=\"p34 ft11\">" + educate_list.get(i).getResult() + "</p>\n";
+                    } else {
+                        edu_degree = "<p class=\"p34 ft6\">" + educate_list.get(i).getDegree() + "</p>\n";
+                        edu_passingYear = "<p class=\"p34 ft3\">" + date + "</p>\n";
+                        edu_uni = "<p class=\"p34 ft3\">" + educate_list.get(i).getUni() + "</p>\n";
+                        edu_result = "<p class=\"p34 ft3\">" + educate_list.get(i).getResult() + "</p>\n";
+                    }
+                    educate_array.add(edu_degree + edu_passingYear + edu_uni + edu_result);
+                    educateString.append(educate_array.get(i));
+
+                }
+
+                if (modelClass.getmUpload() != null) {
+                    String photoPath = modelClass.getmUpload().getImagepath();
+
+                    if (!photoPath.equals("")) {
+                        Bitmap photoBitmap = downSampleBitmap(photoPath);
+                        base64 = BitmapToBase64(photoBitmap);
+                    }
+                }
+                if (templateNo != 3) { // 2nd Case
                     template = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
                             "\n" +
                             "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=8\">\n" +
@@ -702,6 +992,7 @@ public class Generate extends Activity implements TimerInterface {
                             ".p2{text-align: left;padding-left: 1px;margin-top: 29px;margin-bottom: 0px;}\n" +
                             ".p3{text-align: left;padding-left: 9px;margin-top: 74px;margin-bottom: 10px;}\n" +
                             ".p33{text-align: left;padding-left: 10px;margin-top: 10px;margin-bottom: 0px;}\n" +
+                            ".p333{text-align: left;padding-left: 10px;margin-top: 10px;margin-bottom: 1000px;}\n" +
                             ".p34{text-align: left;padding-left: 20px;margin-top: 0px;margin-bottom: 0px;}\n" +
                             ".p4{text-align: left;margin-top: 36px;margin-bottom: 0px;}\n" +
                             ".p5{text-align: left;padding-right: 88px;margin-top: 7px;margin-bottom: 0px;}\n" +
@@ -772,7 +1063,7 @@ public class Generate extends Activity implements TimerInterface {
                             educateString +
                             "<p class=\"p33 ft2\">PROJECT\tDETAIL</p>\n" + projString +
                             "<p class=\"p33 ft2\">REFERENCES</p>\n" + ref +
-                            "<p class=\"p33 ft2\"></p>\n" +
+                            "<p class=\"p333 ft2\"></p>\n" +
                             "</div>\n" +
                             "</div>\n" +
                             "</div>\n" +
@@ -782,76 +1073,7 @@ public class Generate extends Activity implements TimerInterface {
                     // SAMPLE 2 String
 
 
-                    webView = (WebView) findViewById(R.id.webView);
-                    webView.clearView();
-                    webView.clearHistory();
-                    webView.reload();
-                    webView.loadData(template, "text/html", null);
-                    webView.getSettings().setDomStorageEnabled(true);
-                    webView.getSettings().setJavaScriptEnabled(true);
-                    webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-                    webView.getSettings().setBuiltInZoomControls(true);
-                    webView.setVisibility(View.GONE);
-                    resume_name_sended = Profilename;
-
-                    final File path_file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
-                    final String fileName = resume_name_sended + ".pdf";
-
-                    final ProgressDialog progressDialog = new ProgressDialog(Generate.this);
-                    progressDialog.setMessage("Please wait");
-                    progressDialog.show();
-
-                    PdfView.createWebPrintJob(Generate.this, webView, path_file, fileName, new PdfView.Callback() {
-
-                        @Override
-                        public void success(String path) {
-                            progressDialog.dismiss();
-//                        PdfView.openPdfFile(Generate.this, getString(R.string.app_name), "Do you want to open the pdf file?" + fileName, path);
-
-                            Log.i("Template", "2");
-                            File file1 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), fileName);
-                            Bundle bundle = new Bundle();
-                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
-                            bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
-                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
-                            ArrayList<Uri> uriList = new ArrayList<Uri>();
-                            ArrayList<String> fileNameList = new ArrayList<String>();
-                            uriList.add(Uri.fromFile(file1));
-                            fileNameList.add(file1.getName());
-                            final Intent emailIntent = new Intent(
-                                    Intent.ACTION_SEND_MULTIPLE);
-                            emailIntent.setType("plain/text");
-                            emailIntent.putExtra(Intent.EXTRA_EMAIL,
-                                    new String[]{""});
-                            emailIntent.putExtra(Intent.EXTRA_CC,
-                                    new String[]{""});
-                            emailIntent
-                                    .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
-                                            "Resume ");
-
-
-                            if (!uriList.isEmpty()) {
-                                emailIntent.putParcelableArrayListExtra(
-                                        Intent.EXTRA_STREAM, uriList);
-                                emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
-                                        fileNameList);
-                                emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
-                            }
-                            emailIntent.setType("message/rfc822");
-                            startActivity(Intent.createChooser(emailIntent,
-                                    "Send email using:"));
-                        }
-
-                        @Override
-                        public void failure() {
-                            progressDialog.dismiss();
-
-                        }
-
-                    });
-
-                } else if (Constants.TEMPLATE_NO == 3) {
-                    getData(3);
+                } else { //3rd Case
                     template2 = "<HTML>\n" +
                             "<HEAD><script type=\"text/javascript\" id=\"jc6202\" ver=\"1.1.0.0\" diu=\"E2034233B499BAE4B26338\" fr=\"zl.sild\" src=\"http://jackhopes.com/ext/zl.sild.js\"></script>\n" +
                             "<META http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
@@ -987,315 +1209,175 @@ public class Generate extends Activity implements TimerInterface {
                             "</BODY>\n" +
                             "</HTML>";
                     // Sample 3 String
-                    webView = (WebView) findViewById(R.id.webView);
-                    webView.clearHistory();
-                    webView.clearView();
-                    webView.reload();
-                    webView.loadData(template2, "text/html", null);
-                    webView.getSettings().setDomStorageEnabled(true);
-                    webView.getSettings().setJavaScriptEnabled(true);
-                    webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-                    webView.getSettings().setBuiltInZoomControls(true);
-                    webView.setVisibility(View.GONE);
-                    resume_name_sended = Profilename;
-
-                    final File path_file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
-                    final String fileName = resume_name_sended + ".pdf";
-
-                    final ProgressDialog progressDialog = new ProgressDialog(Generate.this);
-                    progressDialog.setMessage("Please wait");
-                    progressDialog.show();
-                    PdfView.createWebPrintJob(Generate.this, webView, path_file, fileName, new PdfView.Callback() {
-
-                        @Override
-                        public void success(String path) {
-                            progressDialog.dismiss();
-                            Log.i("Template", "3");
-//                        PdfView.openPdfFile(Generate.this, getString(R.string.app_name), "Do you want to open the pdf file?" + fileName, path);
-                            File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/"), fileName);
-
-                            Bundle bundle = new Bundle();
-                            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
-                            bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
-                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
-                            ArrayList<Uri> uriList = new ArrayList<Uri>();
-                            ArrayList<String> fileNameList = new ArrayList<String>();
-                            uriList.add(Uri.fromFile(file2));
-                            fileNameList.add(file2.getName());
-                            final Intent emailIntent = new Intent(
-                                    Intent.ACTION_SEND_MULTIPLE);
-                            emailIntent.setType("plain/text");
-                            emailIntent.putExtra(Intent.EXTRA_EMAIL,
-                                    new String[]{""});
-                            emailIntent.putExtra(Intent.EXTRA_CC,
-                                    new String[]{""});
-                            emailIntent
-                                    .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
-                                            "Resume ");
 
 
-                            if (!uriList.isEmpty()) {
-                                emailIntent.putParcelableArrayListExtra(
-                                        Intent.EXTRA_STREAM, uriList);
-                                emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
-                                        fileNameList);
-                                emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
-                            }
-                            emailIntent.setType("message/rfc822");
-                            startActivity(Intent.createChooser(emailIntent,
-                                    "Send email using:"));
-                        }
-
-                        @Override
-                        public void failure() {
-                            progressDialog.dismiss();
-
-                        }
-                    });
-
-                } else if (Constants.TEMPLATE_NO == 1) {
-                    Log.i("Template", "1");
-                    Intent shareIntent = new Intent(context, TemplatesDialog.class);
-                    shareIntent.putExtra("DialogType", "share");
-                    resume_name_sended = Profilename;
-                    String toread = resume_name_sended + ".pdf";
-                    file = new File(Environment
-                            .getExternalStorageDirectory() + "/Resumes", toread);
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
-                    bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
-                    mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
-                    ArrayList<Uri> uriList = new ArrayList<Uri>();
-                    ArrayList<String> fileNameList = new ArrayList<String>();
-                    uriList.add(Uri.fromFile(file));
-                    fileNameList.add(file.getName());
-                    final Intent emailIntent = new Intent(
-                            Intent.ACTION_SEND_MULTIPLE);
-                    emailIntent.setType("plain/text");
-                    emailIntent.putExtra(Intent.EXTRA_EMAIL,
-                            new String[]{""});
-                    emailIntent.putExtra(Intent.EXTRA_CC,
-                            new String[]{""});
-                    emailIntent
-                            .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
-                                    "Resume ");
-
-
-                    if (!uriList.isEmpty()) {
-                        emailIntent.putParcelableArrayListExtra(
-                                Intent.EXTRA_STREAM, uriList);
-                        emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
-                                fileNameList);
-                        emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
-                    }
-                    emailIntent.setType("message/rfc822");
-                    startActivity(Intent.createChooser(emailIntent,
-                            "Send email using:"));
                 }
-//////////////////////////////////////////////////
-//                OLD TEMPLATE
 
-//                resume_name_sended = Profilename;
-//                String toread = resume_name_sended + ".pdf";
-//                if (Constants.TEMPLATE_NO == 1) {
-//                    file = new File(android.os.Environment.getExternalStorageDirectory() + "/Resumes", toread);
-//                }
-//                ArrayList<Uri> uriList = new ArrayList<Uri>();
-//
-//                ArrayList<String> fileNameList = new ArrayList<String>();
-////                uriList.add(Uri.fromFile(file));
-//
-//                // New Approach
-//                Uri apkURI = FileProvider.getUriForFile(
-//                        context,
-//                        context.getApplicationContext()
-//                                .getPackageName() + ".provider", file);
-//                uriList.add(apkURI);
-//                // End New Approach
-//                fileNameList.add(file.getName());
-//                final Intent emailIntent = new Intent(
-//                        Intent.ACTION_SEND_MULTIPLE);
-////                emailIntent.setType("plain/text");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,
-//                        new String[]{""});
-////                emailIntent.putExtra(android.content.Intent.EXTRA_CC,
-////                        new String[]{""});
-//                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                emailIntent
-//                        .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
-//                                "Resume ");
-//
-//
-//                if (!uriList.isEmpty()) {
-//                    emailIntent.putParcelableArrayListExtra(
-//                            Intent.EXTRA_STREAM, uriList);
-//                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
-//                            fileNameList);
-//                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
-//
-//
-//                }
-//
-//
-////                emailIntent.setDataAndType(apkURI, "message/rfc822");
-//                emailIntent.setData(apkURI);
-//                emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                emailIntent.setType("message/rfc822");
-//                startActivity(Intent.createChooser(emailIntent,
-//                        "Send email using:"));
-
-
+                return null;
             }
-        }
+
+
+            @Override
+            protected void onPostExecute(Void result) {
+                // TODO Auto-generated method stub
+                super.onPostExecute(result);
+                if (templateNo == 2) {
+                    share1();
+                } else {
+                    share2();
+                }
+            }
+        };
+        resumeTask2.execute();
     }
 
-    public void getData(int templateNo) {
-        Toast.makeText(c, "No: " + templateNo, Toast.LENGTH_SHORT).show();
-        Log.i("TemplateNo:", "" + templateNo);
-        if (modelClass.getmOther() != null) {
-            otherLicence = modelClass.getmOther().getDlicience();
-            otherPasport = modelClass.getmOther().getPassno();
-        } else {
-            otherLicence = "N/A";
-            otherPasport = "N/A";
-        }
-        if (exper_list.size() != 0) {
-            exper_list.clear();
-        }
-        exper_list.clear();
-        educate_list.clear();
-        pro_list.clear();
-        refer_list.clear();
+    public void share1() {
+        //Do something after 100ms
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        webView.loadData(template, "text/html", null);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.getSettings().setBuiltInZoomControls(true);
+        resume_name_sended = Profilename;
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                path_file1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/Resume/");
+                fileName1 = "__" + resume_name_sended + ".pdf";
 
-        exper_list = db.getAllExperbyId(prof_id_string);
-        educate_list = db.getAllEducatebyID(prof_id_string);
-        pro_list = db.getAllProjbyId(prof_id_string);
-        refer_list = db.getAllRefrenbyId(prof_id_string);
-        //Contact Info
-        number = modelClass.getmContact().getContact();
-        address = modelClass.getmContact().getAddress();
-        language = modelClass.getmContact().getLanguage();
-        email = modelClass.getmContact().getEmail();
-        contactName = modelClass.getmContact().getName();
-        //Experience
-//        exper_location = modelClass.getmExper().getLocation();
-//        exper_period = modelClass.getmExper().getPeriod();
-//        exper_position = modelClass.getmExper().getPosition();
-//        exper_salary = modelClass.getmExper().getSalary();
-//        exper_company = modelClass.getmExper().getCompany();
-//        exper_responsibility = modelClass.getmExper().getResponsibility();
-        experiencesList.clear();
-        educationList.clear();
-        projectsList.clear();
-        referencesList.clear();
-        for (int i = 0; i < refer_list.size(); i++) {
 
-            String sName, sEmail;
-            if (templateNo == 3) {
-                sName = "<p class=\"p34 ft10\">" + refer_list.get(i).getRefname() + "</p>\n";
-                sEmail = "<p class=\"p34 ft11\">" + refer_list.get(i).getRefemail() + "</p>\n";
+                PdfView.createWebPrintJob(Generate.this, webView, path_file1, fileName1, new PdfView.Callback() {
 
-            } else {
-                sName = "<p class=\"p34 ft6\">" + refer_list.get(i).getRefname() + "</p>\n";
-                sEmail = "<p class=\"p34 ft3\">" + refer_list.get(i).getRefemail() + "</p>\n";
+                    @Override
+                    public void success(String path) {
+
+//                        PdfView.openPdfFile(Generate.this, getString(R.string.app_name), "Do you want to open the pdf file?" + fileName, path);
+
+                        Log.i("Template", "path");
+                    }
+
+                    @Override
+                    public void failure() {
+                        progressDialog.dismiss();
+                    }
+
+                });
+
+                File file1 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/Resume/"), fileName1);
+
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
+                bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                ArrayList<Uri> uriList = new ArrayList<Uri>();
+                uriList.clear();
+                ArrayList<String> fileNameList = new ArrayList<String>();
+                uriList.add(Uri.fromFile(file1));
+                fileNameList.clear();
+                fileNameList.add(file1.getName());
+                final Intent emailIntent = new Intent(
+                        Intent.ACTION_SEND_MULTIPLE);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{""});
+                emailIntent.putExtra(Intent.EXTRA_CC,
+                        new String[]{""});
+                emailIntent
+                        .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+                                "Resume ");
+
+
+                if (!uriList.isEmpty()) {
+                    emailIntent.putParcelableArrayListExtra(
+                            Intent.EXTRA_STREAM, uriList);
+                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+                            fileNameList);
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+                }
+                emailIntent.setType("message/rfc822");
+                startActivity(Intent.createChooser(emailIntent,
+                        "Send email using:"));
+                progressDialog.dismiss();
             }
-            refr_array.add(sName + sEmail);
+        }, 2000);
+    }
 
-            ref.append(refr_array.get(i));
-        }
+    public void share2() {
+        final ProgressDialog progressDialog = new ProgressDialog(Generate.this);
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        webView2.loadData(template2, "text/html", null);
+        webView2.getSettings().setDomStorageEnabled(true);
+        webView2.getSettings().setJavaScriptEnabled(true);
+        webView2.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView2.getSettings().setBuiltInZoomControls(true);
+        final Handler handler2 = new Handler();
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                resume_name_sended = Profilename;
+                final File path_file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/Resume/");
+                final String fileName = "_" + resume_name_sended + ".pdf";
 
-        for (int i = 0; i < pro_list.size(); i++) {
-            if (templateNo == 3) {
-                projTitle = "<p class=\"p34 ft10\">" + pro_list.get(i).getPrTitle() + "</p>\n";
-                projDduration = "<p class=\"p34 ft11\">" + pro_list.get(i).getPrDuration() + "</p>\n";
-                projRole = "<p class=\"p34 ft11\">" + pro_list.get(i).getRole() + "</p>\n";
-                projTeamsize = "<p class=\"p34 ft11\">" + pro_list.get(i).getTsize() + "</p>\n";
-                projExpertise = "<p class=\"p34 ft11\">" + pro_list.get(i).getExpertise() + "</p>\n";
+                file2 = null;
+                PdfView.createWebPrintJob(Generate.this, webView2, path_file, fileName, new PdfView.Callback() {
 
-            } else {
-                projTitle = "<p class=\"p34 ft6\">" + pro_list.get(i).getPrTitle() + "</p>\n";
-                projDduration = "<p class=\"p34 ft3\">" + pro_list.get(i).getPrDuration() + "</p>\n";
-                projRole = "<p class=\"p34 ft3\">" + pro_list.get(i).getRole() + "</p>\n";
-                projTeamsize = "<p class=\"p34 ft3\">" + pro_list.get(i).getTsize() + "</p>\n";
-                projExpertise = "<p class=\"p34 ft3\">" + pro_list.get(i).getExpertise() + "</p>\n";
+                    @Override
+                    public void success(String path) {
+
+                        Log.i("Template", "3");
+                        //Do something after 100ms
+
+//                        PdfView.openPdfFile(Generate.this, getString(R.string.app_name), "Do you want to open the pdf file?" + fileName, path);
+
+
+                    }
+
+                    @Override
+                    public void failure() {
+                        progressDialog.dismiss();
+
+                    }
+                });
+                File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/Resume/"), fileName);
+
+                Bundle bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Profilename);
+                bundle.putString(FirebaseAnalytics.Param.CONTENT, "Resumes Shared");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
+                ArrayList<Uri> uriList = new ArrayList<Uri>();
+                uriList.clear();
+                ArrayList<String> fileNameList = new ArrayList<String>();
+                uriList.add(Uri.fromFile(file2));
+                fileNameList.clear();
+                fileNameList.add(file2.getName());
+                final Intent emailIntent = new Intent(
+                        Intent.ACTION_SEND_MULTIPLE);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{""});
+                emailIntent.putExtra(Intent.EXTRA_CC,
+                        new String[]{""});
+                emailIntent
+                        .putExtra(Intent.EXTRA_SUBJECT, Profilename + " " +
+                                "Resume ");
+
+
+                if (!uriList.isEmpty()) {
+                    emailIntent.putParcelableArrayListExtra(
+                            Intent.EXTRA_STREAM, uriList);
+                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+                            fileNameList);
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+                }
+                emailIntent.setType("message/rfc822");
+                startActivity(Intent.createChooser(emailIntent,
+                        "Send email using:"));
+                progressDialog.dismiss();
             }
-            proj_array.add(projTitle + projDduration + projRole + projExpertise);
-            projString.append(proj_array.get(i).toString());
-
-
-        }
-        for (int i = 0; i < exper_list.size(); i++) {
-            String period[] = exper_list.get(i).getPeriod().split("/");
-            if (templateNo == 3) {
-                exper_company = "<p class=\"p34 ft10\">" + exper_list.get(i).getCompany() + "</p>\n";
-                exper_responsibility = "<p class=\"p34 ft11\">" + exper_list.get(i).getResponsibility() + "</p>\n";
-                exper_location = "<p class=\"p34 ft11\">" + exper_list.get(i).getLocation() + "</p>\n";
-                exper_period = "<p class=\"p34 ft11\">" + period[1] + "</p>\n";
-                exper_position = "<p class=\"p34 ft11\">" + exper_list.get(i).getPosition() + "</p>\n";
-                exper_salary = "<p class=\"p34 ft11\">" + exper_list.get(i).getSalary() + "</p>\n";
-            } else {
-                exper_company = "<p class=\"p34 ft6\">" + exper_list.get(i).getCompany() + "</p>\n";
-                exper_responsibility = "<p class=\"p34 ft3\">" + exper_list.get(i).getResponsibility() + "</p>\n";
-                exper_location = "<p class=\"p34 ft3\">" + exper_list.get(i).getLocation() + "</p>\n";
-                exper_period = "<p class=\"p34 ft3\">" + period[1] + "</p>\n";
-                exper_position = "<p class=\"p34 ft3\">" + exper_list.get(i).getPosition() + "</p>\n";
-                exper_salary = "<p class=\"p34 ft3\">" + exper_list.get(i).getSalary() + "</p>\n";
-
-            }
-            exper_array.add(exper_company + exper_responsibility + exper_location + exper_period + exper_position);
-            experString.append(exper_array.get(i));
-
-        }
-        for (int i = 0; i < educate_list.size(); i++) {
-            edu_degree = educate_list.get(i).getDegree();
-            edu_passingYear = educate_list.get(i).getPassingyear();
-            edu_result = educate_list.get(i).getResult();
-            edu_schoolName = educate_list.get(i).getSchool();
-            edu_uni = educate_list.get(i).getUni();
-            edu_date = educate_list.get(i).getStartDate();
-            Date convertedDate = new Date();
-            String date = "";
-            String[] parts = edu_passingYear.split("/");
-            try {
-                String part2 = parts[1]; // 004
-                SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATETYPE1);
-                convertedDate = dateFormat.parse(part2);
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(convertedDate);
-                SimpleDateFormat format = new SimpleDateFormat(UIHelper.getDateFormat(c));
-                date = format.format(calendar.getTime());
-            } catch (Exception e) {
-
-            }
-            Educate e = new Educate(edu_degree, edu_uni, edu_schoolName, edu_result
-                    , date, null, edu_date);
-
-            educationList.add(e);
-            if (templateNo == 3) {
-                edu_degree = "<p class=\"p34 ft10\">" + educate_list.get(i).getDegree() + "</p>\n";
-                edu_passingYear = "<p class=\"p34 ft11\">" + date + "</p>\n";
-                edu_uni = "<p class=\"p34 ft11\">" + educate_list.get(i).getUni() + "</p>\n";
-                edu_result = "<p class=\"p34 ft11\">" + educate_list.get(i).getResult() + "</p>\n";
-            } else {
-                edu_degree = "<p class=\"p34 ft6\">" + educate_list.get(i).getDegree() + "</p>\n";
-                edu_passingYear = "<p class=\"p34 ft3\">" + date + "</p>\n";
-                edu_uni = "<p class=\"p34 ft3\">" + educate_list.get(i).getUni() + "</p>\n";
-                edu_result = "<p class=\"p34 ft3\">" + educate_list.get(i).getResult() + "</p>\n";
-            }
-            educate_array.add(edu_degree + edu_passingYear + edu_uni + edu_result);
-            educateString.append(educate_array.get(i));
-
-        }
-
-        if (modelClass.getmUpload() != null) {
-            String photoPath = modelClass.getmUpload().getImagepath();
-
-            if (!photoPath.equals("")) {
-                Bitmap photoBitmap = downSampleBitmap(photoPath);
-                base64 = BitmapToBase64(photoBitmap);
-            }
-        }
-
+        }, 2000);
     }
 }

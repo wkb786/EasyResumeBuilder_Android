@@ -3,8 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg"
-                android:contentDescription="@string/generate_resume_page"
-    tools:context=".MainActivity" >
+    android:contentDescription="@string/generate_resume_page"
+    tools:context=".MainActivity">
 
     <RelativeLayout
         android:id="@+id/titlebar"
@@ -13,13 +13,13 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/top_bar"
         android:gravity="center"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageviewpersonal"
@@ -45,21 +45,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/titlebar"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:id="@+id/MainLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/barheighttitle"
                 android:background="@drawable/sub_title"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textviewpersonal2"
@@ -78,21 +78,21 @@
                 android:layout_height="@dimen/barheight"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/share"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                        android:contentDescription="@string/aboutus"
-                    android:background="@drawable/selector_text_btn" />
+                    android:background="@drawable/selector_text_btn"
+                    android:contentDescription="@string/aboutus" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_vertical|center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageviewabout"
@@ -112,14 +112,14 @@
                         android:textSize="@dimen/bar_textsize" />
                 </LinearLayout>
             </RelativeLayout>
-            
+
             <RelativeLayout
                 android:id="@+id/LinearLayout02"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/barheight"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/generateandshare"
@@ -133,7 +133,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_vertical|center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageview_gen_share"
@@ -160,21 +160,21 @@
                 android:layout_height="@dimen/barheight"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/about"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                        android:contentDescription="@string/aboutus"
-                    android:background="@drawable/selector_text_btn" />
+                    android:background="@drawable/selector_text_btn"
+                    android:contentDescription="@string/aboutus" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_vertical|center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageviewabout1"
@@ -194,28 +194,28 @@
                         android:textSize="@dimen/bar_textsize" />
                 </LinearLayout>
             </RelativeLayout>
-            
+
             <RelativeLayout
                 android:id="@+id/LinearLayout032"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/barheight"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/suggestion"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                        android:contentDescription="@string/aboutus"
-                    android:background="@drawable/selector_text_btn" />
+                    android:background="@drawable/selector_text_btn"
+                    android:contentDescription="@string/aboutus" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_vertical|center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageviewsuggestion1"
@@ -235,27 +235,28 @@
                         android:textSize="@dimen/bar_textsize" />
                 </LinearLayout>
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/LinearLayout0333"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/barheight"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/translation"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="fill_parent"
                     android:layout_height="match_parent"
-                        android:contentDescription="@string/aboutus"
-                    android:background="@drawable/selector_text_btn" />
+                    android:background="@drawable/selector_text_btn"
+                    android:contentDescription="@string/aboutus" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center_vertical|center_horizontal"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <ImageView
                         android:id="@+id/imageviewtranslation1"
@@ -278,16 +279,26 @@
         </LinearLayout>
     </ScrollView>
 
-    <include android:id="@+id/adView"
+    <include
+        android:id="@+id/adView"
         layout="@layout/adxml"
         android:visibility="gone" />
+
     <WebView
-        android:layout_alignParentBottom="true"
-        android:layout_weight="1.9"
         android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:visibility="visible"
-        />
+        android:layout_height="0.1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1.9"
+        android:visibility="visible" />
+
+    <WebView
+        android:id="@+id/webView2"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1.9"
+        android:visibility="visible" />
+
 
 </RelativeLayout>
