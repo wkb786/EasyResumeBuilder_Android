@@ -33,13 +33,13 @@
         android:gravity="right|center_vertical"
         android:orientation="horizontal">
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/tvFAQ"
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:padding="5dp"
-            android:src="@drawable/ic_faq" />
+            android:src="@drawable/ic_faq" />-->
 
         <ImageView
             android:id="@+id/imgClear"

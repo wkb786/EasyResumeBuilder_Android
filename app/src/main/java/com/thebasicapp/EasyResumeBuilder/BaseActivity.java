@@ -19,7 +19,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 public class BaseActivity extends Activity implements View.OnClickListener {
 
     protected TextView txtHeading;
-    protected ImageView txtFAQ, imgClear;
+    protected ImageView /*txtFAQ,*/ imgClear;
     protected ImageView imgSource, imgSettings;
     private Context context;
     private Activity activity;
@@ -42,12 +42,12 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         txtHeading = (TextView) findViewById(R.id.textviewpersonal);
         imgSource = (ImageView) findViewById(R.id.imageviewpersonal);
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
-        txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
+        //txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
         imgClear = (ImageView) findViewById(R.id.imgClear);
         imgClear.setVisibility(View.GONE);
-        txtFAQ.setVisibility(View.VISIBLE);
+        //txtFAQ.setVisibility(View.VISIBLE);
         imgSettings.setVisibility(View.VISIBLE);
-        txtFAQ.setOnClickListener(new OnClickListener() {
+      /*  txtFAQ.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -61,7 +61,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
                     UIHelper.showAlert(context, getResources().getString(R.string.internet_connection));
                 }
             }
-        });
+        });*/
         imgSettings.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -85,13 +85,13 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         txtHeading = (TextView) findViewById(R.id.textviewpersonal);
         imgSource = (ImageView) findViewById(R.id.imageviewpersonal);
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
-        txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
-        txtFAQ.setVisibility(View.VISIBLE);
+       // txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
+        //txtFAQ.setVisibility(View.VISIBLE);
         imgSettings.setVisibility(View.VISIBLE);
         imgClear = (ImageView) findViewById(R.id.imgClear);
         imgClear.setVisibility(View.VISIBLE);
         imgClear.setOnClickListener(this);
-        txtFAQ.setOnClickListener(new OnClickListener() {
+      /*  txtFAQ.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
                     UIHelper.showAlert(context, getResources().getString(R.string.internet_connection));
                 }
             }
-        });
+        });*/
         imgSettings.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -122,13 +122,13 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         txtHeading = (TextView) findViewById(R.id.textviewpersonal);
         imgSource = (ImageView) findViewById(R.id.imageviewpersonal);
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
-        txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
-        txtFAQ.setVisibility(View.VISIBLE);
+       // txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
+       // txtFAQ.setVisibility(View.VISIBLE);
         imgSettings.setVisibility(View.GONE);
         imgClear = (ImageView) findViewById(R.id.imgClear);
         imgClear.setVisibility(View.VISIBLE);
         imgClear.setOnClickListener(this);
-        txtFAQ.setOnClickListener(new OnClickListener() {
+       /* txtFAQ.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -141,7 +141,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
                     UIHelper.showAlert(context, getResources().getString(R.string.internet_connection));
                 }
             }
-        });
+        });*/
         imgSettings.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -162,11 +162,11 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         imgSource = (ImageView) findViewById(R.id.imageviewpersonal);
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
         imgSettings.setVisibility(View.VISIBLE);
-        txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
-        txtFAQ.setVisibility(View.VISIBLE);
+        //txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
+      //  txtFAQ.setVisibility(View.VISIBLE);
         imgClear = (ImageView) findViewById(R.id.imgClear);
         imgClear.setVisibility(View.GONE);
-        txtFAQ.setOnClickListener(new OnClickListener() {
+        /*txtFAQ.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -179,7 +179,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
                     UIHelper.showAlert(context, getResources().getString(R.string.internet_connection));
                 }
             }
-        });
+        });*/
         txtHeading.setText(title);
         imgSource.setImageDrawable(drawable);
     }
@@ -190,11 +190,11 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         imgSource = (ImageView) findViewById(R.id.imageviewpersonal);
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
         imgSettings.setVisibility(View.GONE);
-        txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
-        txtFAQ.setVisibility(View.VISIBLE);
+       // txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
+       // txtFAQ.setVisibility(View.VISIBLE);
         imgClear = (ImageView) findViewById(R.id.imgClear);
         imgClear.setVisibility(View.GONE);
-        txtFAQ.setOnClickListener(new OnClickListener() {
+      /*  txtFAQ.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -207,7 +207,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
                     UIHelper.showAlert(context, getResources().getString(R.string.internet_connection));
                 }
             }
-        });
+        });*/
         txtHeading.setText(title);
         imgSource.setImageDrawable(drawable);
     }
@@ -218,8 +218,8 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         imgSource = (ImageView) findViewById(R.id.imageviewpersonal);
         imgSettings = (ImageView) findViewById(R.id.imgSettings);
         imgSettings.setVisibility(View.GONE);
-        txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
-        txtFAQ.setVisibility(View.GONE);
+        //txtFAQ = (ImageView) findViewById(R.id.tvFAQ);
+        //txtFAQ.setVisibility(View.GONE);
         txtHeading.setText(title);
         imgClear = (ImageView) findViewById(R.id.imgClear);
         imgClear.setVisibility(View.GONE);

@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ERB_Android-main.iml" filepath="$PROJECT_DIR$/.idea/modules/ERB_Android-main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ERB_Android-main.app.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.main.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/ERB_Android-main.webviewtopdf.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EasyResumeBuilder_Android.iml" filepath="$PROJECT_DIR$/.idea/modules/EasyResumeBuilder_Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EasyResumeBuilder_Android.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.main.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/webviewtopdf/EasyResumeBuilder_Android.webviewtopdf.unitTest.iml" />
     </modules>
   </component>
 </project>
