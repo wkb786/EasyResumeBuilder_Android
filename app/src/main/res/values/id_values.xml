@@ -15,7 +15,11 @@
     <string name="testdevice">ca-app-pub-6060832157788103/1218371270</string>
     <string name="send_email_id">support@technokeet.com</string>
     <string name="send_email_text">Send email...</string>
-<!--TEST IDS-->
-    <string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_full_screen">ca-app-pub-3940256099942544/1033173712</string>
+    <!--TEST IDS-->
+    <!--<string name="admob_banner_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_full_screen">ca-app-pub-3940256099942544/1033173712</string>-->
+   <!-- REAL IDS-->
+    <string name="admob_banner_id">ca-app-pub-6060832157788103/9587570877</string>
+    <string name="interstitial_full_screen">ca-app-pub-6060832157788103/1218371270</string>
+
 </resources>

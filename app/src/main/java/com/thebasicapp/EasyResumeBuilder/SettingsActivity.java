@@ -32,8 +32,8 @@ public class SettingsActivity extends BaseActivity implements TimerInterface{
         adView = (AdView) findViewById(R.id.adView);
         rdDateFormat = (RadioGroup) findViewById(R.id.rgdateformat);
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+
+                .build();
         adView.setAdListener(new ToastAdListener(SettingsActivity.this, adView));
         adView.loadAd(adRequest);
         context = this;

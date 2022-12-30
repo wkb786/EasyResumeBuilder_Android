@@ -51,8 +51,9 @@ public class Project extends BaseActivity implements DateTimePicker.DateWatcher,
         adView = (AdView) findViewById(R.id.adView);
         context = this;
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice(getString(R.string.testdevice))
+                .build();
         adView.setAdListener(new ToastAdListener(Project.this, adView));
         adView.loadAd(adRequest);
 

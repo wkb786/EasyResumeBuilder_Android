@@ -1,6 +1,7 @@
 package com.thebasicapp.EasyResumeBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 import android.Manifest;
 import android.app.Activity;
@@ -10,27 +11,40 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.util.Log;
 import android.view.Window;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.admanager.AdManagerAdRequest;
+import com.google.android.gms.ads.admanager.AdManagerInterstitialAd;
+import com.google.android.gms.ads.admanager.AdManagerInterstitialAdLoadCallback;
+import com.google.android.gms.ads.initialization.AdapterStatus;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 
 public class Splash extends Activity {
 
     DatabaseHandler db = new DatabaseHandler(this);
     Context context;
+public static Splash Instance;
 
-//    InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         context = this;
+        Instance=this;
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.splash);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -44,7 +58,17 @@ public class Splash extends Activity {
         } else {
             MoveNext();
         }
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                Map<String, AdapterStatus> statusMap = initializationStatus.getAdapterStatusMap();
+                for (String adapterClass : statusMap.keySet()) {
+                    AdapterStatus status = statusMap.get(adapterClass);
 
+                }
+                loadAd();
+            }
+        });
     }
 
     void MoveNext() {
@@ -113,5 +137,75 @@ public class Splash extends Activity {
                 break;
         }
     }
+    //// Admob Int Start
+    private AdManagerInterstitialAd interstitialAd;
 
+    public void loadAd() {
+        AdManagerAdRequest adRequest = new AdManagerAdRequest.Builder().build();
+        AdManagerInterstitialAd.load(
+                this,
+                "ca-app-pub-6060832157788103/1218371270",
+                adRequest,
+                new AdManagerInterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull AdManagerInterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        Splash.this.interstitialAd = interstitialAd;
+
+
+                        //Toast.makeText(Screen_Mirroring_Activity.this, "onAdLoaded()", Toast.LENGTH_SHORT).show();
+                        interstitialAd.setFullScreenContentCallback(
+                                new FullScreenContentCallback() {
+                                    @Override
+                                    public void onAdDismissedFullScreenContent() {
+                                        // Called when fullscreen content is dismissed.
+                                        Log.d("TAG", "The ad was dismissed.");
+
+                                        Splash.this.interstitialAd = null;
+
+
+                                        loadAd();
+
+                                    }
+
+                                    @Override
+                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                        // Called when fullscreen content failed to show.
+                                        //Log.d("TAG", "The ad failed to show.");
+                                        // Make sure to set your reference to null so you don't
+                                        // show it a second time.
+                                        // Screen_Mirroring_Activity.this.interstitialAd = null;
+                                    }
+
+                                    @Override
+                                    public void onAdShowedFullScreenContent() {
+                                        // Called when fullscreen content is shown.
+                                        Log.d("TAG", "The ad was shown.");
+                                    }
+                                });
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+
+                        interstitialAd = null;
+
+
+                    }
+                });
+    }
+
+    public void showInterstitial(Activity activity) {
+        // Show the ad if it's ready. Otherwise toast and restart the game.
+
+        if (interstitialAd != null) {
+            interstitialAd.show(activity);
+
+        } else {
+            loadAd();
+
+        }
+    }
 }

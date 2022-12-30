@@ -24,16 +24,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdActivity;
+
 import com.thebasicapp.EasyResumeBuilder.R;
 
 import Helper.Constants;
 import Helper.UIHelper;
 
-import com.google.android.gms.ads.AdListener;
+
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+
 
 public class MainActivity extends BaseActivity implements TimerInterface {
     DatabaseHandler db = new DatabaseHandler(this);
@@ -48,7 +48,7 @@ public class MainActivity extends BaseActivity implements TimerInterface {
     AsyncTask<Void, Void, Void> resumeTask;
     String nameCheck = "";
     private Context context;
-    public static InterstitialAd mInterstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,50 +57,10 @@ public class MainActivity extends BaseActivity implements TimerInterface {
         setContentView(R.layout.slider);
 
         context = this;
-    /*	mInterstitialAd = new InterstitialAd(this);
 
-        // set the ad unit ID
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_full_screen));*/
-
-        mInterstitialAd=new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId(getString(R.string.interstitial_full_screen));
-
-        mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-
-                AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("78AA8147493ED07DCD7ED83361C09655")
-                        .build();
-                mInterstitialAd.loadAd(adRequestfullScreen);
-            }
-
-        });
-
-        AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("78AA8147493ED07DCD7ED83361C09655")
-                .build();
-
-        mInterstitialAd.loadAd(adRequestfullScreen);
-
-
-        // Load ads into Interstitial Ads
-//        mInterstitialAd.loadAd(adRequestfullScreen);
-
-//        mInterstitialAd.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                showInterstitial();
-//            }
-//        });
         int val = UIHelper.getSaveData(Constants.Counter, context);
         if (val % 3 == 0) {
-            /*mInterstitialAd.loadAd(adRequestfullScreen);
-              mInterstitialAd.setAdListener(new AdListener() {
-                  public void onAdLoaded() {
-                      showInterstitial();
-                  }
-              });*/
+          Splash.Instance.showInterstitial(MainActivity.this);
 
         }
         val++;
@@ -108,8 +68,8 @@ public class MainActivity extends BaseActivity implements TimerInterface {
         adView = (AdView) findViewById(R.id.adView);
 
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+
+        .build();
         adView.setAdListener(new ToastAdListener(MainActivity.this, adView));
         adView.loadAd(adRequest);
 
@@ -620,4 +580,8 @@ public class MainActivity extends BaseActivity implements TimerInterface {
         //sendAnalyticsScreenTime(screenTime, MainActivity.class.getSimpleName(), profilename);
 
     }
+
+
+
+    //// Int End
 }

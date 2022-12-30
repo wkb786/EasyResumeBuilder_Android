@@ -25,7 +25,7 @@ public class FAQActivty extends BaseActivity implements TimerInterface{
         adView = (AdView) findViewById(R.id.adView);
         webview = (WebView) findViewById(R.id.webView1);
         webview.getSettings().setJavaScriptEnabled(true);
-        webview.loadUrl("http://www.technokeet.com/android-easy-resume-builder-faq/");
+        webview.loadUrl("https://www.technokeet.com/android-easy-resume-builder-faq/");
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -39,8 +39,9 @@ public class FAQActivty extends BaseActivity implements TimerInterface{
         //sendAnalyticsData("FAQ", profilename);
 
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+               // .addTestDevice(getString(R.string.testdevice))
+                .build();
         adView.setAdListener(new ToastAdListener(FAQActivty.this, adView));
         adView.loadAd(adRequest);
     }

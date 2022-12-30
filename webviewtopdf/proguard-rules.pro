@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn com.itextpdf.text.pdf.**
+-dontwarn org.bouncycastle.**
+-dontwarn com.sun.mail.**

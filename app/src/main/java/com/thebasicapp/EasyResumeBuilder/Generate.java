@@ -27,7 +27,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.content.FileProvider;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
+
 import android.text.format.Time;
 import android.util.Base64;
 import android.util.Log;
@@ -37,9 +40,6 @@ import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.Button;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.webviewtopdf.PdfView;
 
@@ -69,11 +69,7 @@ public class Generate extends Activity implements TimerInterface {
     AsyncTask<Void, Void, Void> resumeTask;
     AsyncTask<Void, Void, Void> resumeTask2;
 
-   /* InterstitialAd mInterstitialAd;
-    AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-            .addTestDevice("78AA8147493ED07DCD7ED83361C09655")
-            .build();
-*/
+
 
     Context c;
 
@@ -117,6 +113,7 @@ public class Generate extends Activity implements TimerInterface {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         // Obtain the FirebaseAnalytics instance.
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.generate);
@@ -125,11 +122,7 @@ public class Generate extends Activity implements TimerInterface {
         db = new DatabaseHandler(this);
         webView = (WebView) findViewById(R.id.webView);
         webView2 = (WebView) findViewById(R.id.webView2);
-       /* mInterstitialAd = new InterstitialAd(this);
-        // set the ad unit ID
-        mInterstitialAd.setAdUnitId(
-                getString(R.string.interstitial_full_screen));
-        mInterstitialAd.loadAd(adRequestfullScreen);*/
+
 
 
         Bundle extrasProf = getIntent().getExtras();
@@ -169,7 +162,6 @@ public class Generate extends Activity implements TimerInterface {
                 if (check_name.equalsIgnoreCase("")) {
                     UIHelper.showAlert(context, "Cannot Generate without Personal Information");
                 } else {
-
                     Intent viewIntent = new Intent(context, TemplatesDialog.class);
                     viewIntent.putExtra("DialogType", "view");
                     startActivityForResult(viewIntent, 21);
@@ -438,31 +430,19 @@ public class Generate extends Activity implements TimerInterface {
     protected void onResume() {
         super.onResume();
 
-        if (MainActivity.mInterstitialAd == null) {
 
-            loadIntAd();
-        }
 
         if (isPdf) {
+            Splash.Instance.showInterstitial(Generate.this);
             Toast.makeText(Generate.this, "Pdf application", Toast.LENGTH_SHORT).show();
-            showInterstitial();
+
+
             isPdf = false;
         }
         timerThread = new TimerThread();
         timerThread.setTimerInterface(this);
     }
 
-    private void showInterstitial() {
-        if (MainActivity.mInterstitialAd.isLoaded()) {
-            MainActivity.mInterstitialAd.show();
-
-            AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                    .addTestDevice("78AA8147493ED07DCD7ED83361C09655")
-                    .build();
-            MainActivity.mInterstitialAd.loadAd(adRequestfullScreen);
-
-        }
-    }
 
     int screenTime = 0;
 
@@ -488,32 +468,7 @@ public class Generate extends Activity implements TimerInterface {
         bundle.putString(FirebaseAnalytics.Param.ITEM_CATEGORY, screenName);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, bundle);
     }*/
-    private void loadIntAd() {
 
-
-        MainActivity.mInterstitialAd = new InterstitialAd(context);
-        MainActivity.mInterstitialAd.setAdUnitId(getString(R.string.interstitial_full_screen));
-
-        MainActivity.mInterstitialAd.setAdListener(new AdListener() {
-            @Override
-            public void onAdClosed() {
-                // Load the next interstitial.
-
-                AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                        .addTestDevice("78AA8147493ED07DCD7ED83361C09655")
-                        .build();
-                MainActivity.mInterstitialAd.loadAd(adRequestfullScreen);
-            }
-
-        });
-
-        AdRequest adRequestfullScreen = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice("78AA8147493ED07DCD7ED83361C09655")
-                .build();
-
-        MainActivity.mInterstitialAd.loadAd(adRequestfullScreen);
-
-    }
 
     public Bitmap downSampleBitmap(String path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -569,6 +524,7 @@ public class Generate extends Activity implements TimerInterface {
 
                         final ProgressDialog pd = new ProgressDialog(
                                 Generate.this);
+                        //ll
                         resumeTask = new AsyncTask<Void, Void, Void>() {
 
                             @Override
@@ -621,8 +577,9 @@ public class Generate extends Activity implements TimerInterface {
 
                                     isPdf = true;
 
-                                    Uri path = Uri.fromFile(file);
-//                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                                    Uri path = Uri.fromFile(file);
+                                    Uri path = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file);
+//                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //                                        path = FileProvider.getUriForFile(
 //                                                context,
 //                                                context.getApplicationContext()
@@ -644,7 +601,10 @@ public class Generate extends Activity implements TimerInterface {
 
 
                                         if (Constants.TEMPLATE_NO == 1) {
-                                            startActivity(intent);
+                                            Intent newIntent=new Intent(getApplicationContext(), ViewActivity.class);
+                                             newIntent.putExtra("fileName",path.toString());
+                                            startActivity(newIntent);
+//                                            startActivity(intent);
                                         } else if (Constants.TEMPLATE_NO == 2) {
                                             Intent viewIntent = new Intent(Generate.this, ViewResume.class);
                                             viewIntent.putExtra("profID", prof_id_string);
@@ -704,7 +664,7 @@ public class Generate extends Activity implements TimerInterface {
                     mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SHARE, bundle);
                     ArrayList<Uri> uriList = new ArrayList<Uri>();
                     ArrayList<String> fileNameList = new ArrayList<String>();
-                    uriList.add(Uri.fromFile(file));
+                    uriList.add(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file));
                     fileNameList.add(file.getName());
                     final Intent emailIntent = new Intent(
                             Intent.ACTION_SEND_MULTIPLE);
@@ -1275,7 +1235,7 @@ public class Generate extends Activity implements TimerInterface {
                 ArrayList<Uri> uriList = new ArrayList<Uri>();
                 uriList.clear();
                 ArrayList<String> fileNameList = new ArrayList<String>();
-                uriList.add(Uri.fromFile(file1));
+                uriList.add(FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".provider", file1));
                 fileNameList.clear();
                 fileNameList.add(file1.getName());
                 final Intent emailIntent = new Intent(
@@ -1293,9 +1253,11 @@ public class Generate extends Activity implements TimerInterface {
                 if (!uriList.isEmpty()) {
                     emailIntent.putParcelableArrayListExtra(
                             Intent.EXTRA_STREAM, uriList);
-                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
-                            fileNameList);
-                    emailIntent.putExtra(Intent.EXTRA_TEXT, "created and generated from the Easy Resume Builder application");
+//                    emailIntent.putStringArrayListExtra(Intent.EXTRA_TEXT,
+//                            fileNameList);
+                    ArrayList<String> extraText = new ArrayList<String>();
+                    extraText.add("created and generated from the Easy Resume Builder application");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, extraText);
                 }
                 emailIntent.setType("message/rfc822");
                 startActivity(Intent.createChooser(emailIntent,
@@ -1380,4 +1342,8 @@ public class Generate extends Activity implements TimerInterface {
             }
         }, 2000);
     }
+
+
+
+
 }

@@ -50,9 +50,10 @@ public class AboutUsActivity extends Activity implements
 
 		mAdView = (AdView) findViewById(R.id.adView);
 
-		AdRequest adRequest = new AdRequest.Builder().
-				addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-				.addTestDevice(getString(R.string.testdevice)).build();
+		AdRequest adRequest = new AdRequest.Builder()
+				//addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+				//.addTestDevice(getString(R.string.testdevice))
+				.build();
 		mAdView.setAdListener(new ToastAdListener(AboutUsActivity.this, mAdView));
 		mAdView.loadAd(adRequest);
 		noInterneText = getString(R.string.text_no_internet);

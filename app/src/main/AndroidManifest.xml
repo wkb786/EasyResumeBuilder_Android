@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.thebasicapp.EasyResumeBuilder">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- <uses-feature android:name="android.hardware.camera" /> -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- <uses-feature android:name="android.hardware.camera" /> -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -18,17 +16,23 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    />
+
     <application
         android:name=".EasyResumeApplication"
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/erbiconnn"
         android:largeHeap="true"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViewActivity"></activity>
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <!-- AdMob app ID: ca-app-pub-6060832157788103~8110837676 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6060832157788103~8110837676"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -38,7 +42,8 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateHidden|adjustResize">
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -108,15 +113,14 @@
         <activity
             android:name=".TemplatesDialog"
             android:label="Choose Template"
-            android:theme="@style/mytheme"></activity>
-        <activity android:name=".Generate"></activity>
+            android:theme="@style/mytheme" />
+        <activity android:name=".Generate" />
 
         <meta-data
             android:name="ADMOB_ALLOW_LOCATION_FOR_ADS"
             android:value="true" />
 
-        <activity android:name=".ViewResume" />
-        <!-- <provider -->
+        <activity android:name=".ViewResume" /> <!-- <provider -->
         <!-- android:name=".GenericFileProvider" -->
         <!-- android:authorities="${applicationId}.my.package.name.provider" -->
         <!-- android:exported="false" -->
@@ -126,7 +130,7 @@
         <!-- android:resource="@xml/provider_paths"/> -->
         <!-- </provider> -->
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -134,8 +138,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
-
     </application>
 
 </manifest>

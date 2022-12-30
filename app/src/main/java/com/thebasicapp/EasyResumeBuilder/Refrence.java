@@ -49,8 +49,9 @@ public class Refrence extends BaseActivity implements TimerInterface {
         
         context = this;
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice(getString(R.string.testdevice))
+                .build();
         adView.setAdListener(new ToastAdListener(Refrence.this, adView));
         adView.loadAd(adRequest);
 

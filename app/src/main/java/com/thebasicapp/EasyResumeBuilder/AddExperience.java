@@ -46,8 +46,9 @@ public class AddExperience extends BaseActivity implements TimerInterface {
 
 
 		AdRequest adRequest = new AdRequest.Builder()
-				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-				.addTestDevice(getString(R.string.testdevice)).build();
+	//			.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+				//.addTestDevice(getString(R.string.testdevice))
+				.build();
 		adView.setAdListener(new ToastAdListener(AddExperience.this, adView));
 		adView.loadAd(adRequest);
 

@@ -229,8 +229,6 @@ public class GenerateResume {
                 }
             }
 
-        } else {
-
         }
         Chunk sigUnderline = new Chunk("");
         sigUnderline.setUnderline(0.1f, -2f);

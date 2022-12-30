@@ -50,8 +50,9 @@ public class AddEducation extends BaseActivity implements TimerInterface  {
 
 
 		AdRequest adRequest = new AdRequest.Builder()
-				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-				.addTestDevice(getString(R.string.testdevice)).build();
+				//.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+				//.addTestDevice(getString(R.string.testdevice))
+				.build();
 		adView.setAdListener(new ToastAdListener(AddEducation.this, adView));
 		adView.loadAd(adRequest);
 		noInterneText = getString(R.string.text_no_internet);

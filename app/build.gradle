@@ -1,38 +1,51 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 33
+    buildToolsVersion '33.0.0'
     compileOptions.encoding = 'windows-1251' // write your encoding here
     defaultConfig {
         applicationId "com.thebasicapp.EasyResumeBuilder"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 10
-        versionName '1.3.4'
+        minSdkVersion 22
+        targetSdkVersion 33
+        versionCode 22
+        versionName '1.5.4'
+        multiDexEnabled true
     }
 
     productFlavors {
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.google.firebase:firebase-ads:10.2.1'
-    compile files('libs/itextpdf-5.5.3.jar')
-    compile 'com.google.firebase:firebase-core:10.2.1'
-    compile 'com.google.firebase:firebase-crash:10.2.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    compile 'com.android.support.constraint:constraint-layout:1.1.0'
-    compile 'com.google.android.gms:play-services-ads:10.2.1'
-    compile 'com.google.android.gms:play-services-analytics:10.2.1'
-    compile 'com.google.android.gms:play-services-drive:10.2.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compile 'com.android.support:multidex:1.0.2'
+    implementation 'com.google.firebase:firebase-ads:21.4.0'
+//    implementation 'com.itextpdf:itextpdf:5.0.6'
+    implementation files('libs/itextpdf-5.5.3.jar')
+    implementation 'com.google.ads.mediation:facebook:6.12.0.0'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+   implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.0.3'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.gms:play-services-ads:21.4.0'
+    implementation 'com.google.android.gms:play-services-analytics:18.0.2'
+    implementation 'com.google.android.gms:play-services-drive:17.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation project(':webviewtopdf')
     implementation 'com.intuit.sdp:sdp-android:1.0.5'
 }

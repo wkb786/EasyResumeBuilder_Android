@@ -31,7 +31,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.thebasicapp.EasyResumeBuilder.R;
 
@@ -83,8 +83,9 @@ public class AddProfile extends BaseActivity implements TimerInterface{
         });*/
 
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+
+               // .addTestDevice(getString(R.string.testdevice))
+                .build();
         adView.setAdListener(new ToastAdListener(AddProfile.this, adView));
         adView.loadAd(adRequest);
 

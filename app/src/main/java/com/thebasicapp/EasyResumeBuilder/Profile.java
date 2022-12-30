@@ -15,10 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
+
+
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.thebasicapp.EasyResumeBuilder.R;
 
@@ -55,17 +59,12 @@ public class Profile extends Activity implements TimerInterface {
 		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "Profile");
 		mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-	/*	mInterstitialAd.loadAd(adRequestfullScreen);
-		mInterstitialAd.setAdListener(new AdListener() {
-			public void onAdLoaded() {
-				showInterstitial();
-			}
-		});*/
+
 
 
 		AdRequest adRequest = new AdRequest.Builder()
-				.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-				.addTestDevice(getString(R.string.testdevice)).build();
+
+		.build();
 		adView.setAdListener(new ToastAdListener(Profile.this, adView));
 		adView.loadAd(adRequest);
 

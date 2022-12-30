@@ -39,25 +39,6 @@ public class ToastAdListener extends AdListener {
         this._mAdView.setVisibility(View.VISIBLE);
     }
 
-    @Override
-    public void onAdFailedToLoad(int errorCode) {
-        String errorReason = "";
-        switch(errorCode) {
-            case AdRequest.ERROR_CODE_INTERNAL_ERROR:
-                errorReason = "Internal error";
-                break;
-            case AdRequest.ERROR_CODE_INVALID_REQUEST:
-                errorReason = "Invalid request";
-                break;
-            case AdRequest.ERROR_CODE_NETWORK_ERROR:
-                errorReason = "Network Error";
-                break;
-            case AdRequest.ERROR_CODE_NO_FILL:
-                errorReason = "No fill";
-                break;
-        }
-       
-    }
 
     @Override
     public void onAdOpened() {
@@ -69,8 +50,5 @@ public class ToastAdListener extends AdListener {
        // Toast.makeText(mContext, "onAdClosed()", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onAdLeftApplication() {
-       // Toast.makeText(mContext, "onAdLeftApplication()", Toast.LENGTH_SHORT).show();
-    }
+
 }

@@ -84,8 +84,9 @@ public class Personal_info extends BaseActivity implements OnItemSelectedListene
         state[2] =gendersNew[2];
         context = this;
         AdRequest adRequest = new AdRequest.Builder()
-                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-                .addTestDevice(getString(R.string.testdevice)).build();
+                //.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                //.addTestDevice(getString(R.string.testdevice))
+                .build();
         adView.setAdListener(new ToastAdListener(Personal_info.this, adView));
         adView.loadAd(adRequest);
 
@@ -549,7 +550,7 @@ public class Personal_info extends BaseActivity implements OnItemSelectedListene
                         db.addContact(new Contact(name, gender, UIHelper.addTypetoString(context, dob),
                                 address, languages, contact, email,
                                 prof_id_string));
-                        showAlert(getString(R.string.info_inserted));
+//                        showAlert(getString(R.string.info_inserted));
                         Personal_info.this.finish();
 //                        }
                     } else {
